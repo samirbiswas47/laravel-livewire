@@ -1,9 +1,412 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
+@import "./suneditor.min.css";
+/* Import Nunito */
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap");
+
+/* Tell Tailwind v4 where to scan */
+@source "../../storage/framework/views/*.php";
+@source "../**/*.blade.php";
+@source "../**/*.js";
+
+
+/* Theme variants */
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dim (&:where(.dim, .dim *));
+@custom-variant cyberpunk (&:where(.cyberpunk, .cyberpunk *));
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Font */
+    --font-sans: "Nunito", sans-serif;
+    /* Screen Theme Overrides */
+    --breakpoint-xs: 30rem;   /* 480px */
+    --breakpoint-sm: 40rem;   /* 640px */
+    --breakpoint-md: 48rem;   /* 768px */
+    --breakpoint-lg: 64rem;   /* 1024px */
+    --breakpoint-xl: 80rem;   /* 1280px */
+    --breakpoint-2xl: 96rem;  /* 1536px */
+    --breakpoint-3xl: 120rem; /* 1920px */
+
+    /* Breakpoints */
+    --breakpoint-xs: 30rem;
+    --breakpoint-sm: 40rem;
+    --breakpoint-md: 48rem;
+    --breakpoint-lg: 64rem;
+    --breakpoint-xl: 80rem;
+    --breakpoint-2xl: 96rem;
+    --breakpoint-3xl: 120rem;
+
+    /* Core tokens */
+    --color-background: var(--bg-color);
+    --color-surface: var(--surface-color);
+    --color-heading: var(--heading-color);
+    --color-muted: var(--muted-color);
+    --color-border: var(--border-color);
+    --color-warning: var(--warning-color);
+
+
+    /* Interactive */
+    --color-input-bg: var(--input-bg-color);
+    --color-btn-neutral-bg: var(--btn-neutral-bg-color);
+    --color-btn-neutral-hover: var(--btn-neutral-hover-color);
+    --color-item-hover: var(--item-hover-color);
+
+    /* Sidebar */
+    --color-sidebar-bg: var(--sidebar-bg-color);
+    --color-sidebar-text: var(--sidebar-text-color);
+    --color-sidebar-border: var(--sidebar-border-color);
+    --color-sidebar-hover: var(--sidebar-hover-color);
+    --color-tooltip-bg: var(--tooltip-bg-color);
+    --color-tooltip-text: var(--tooltip-text-color);
+
+    /* Button Tokens */
+    --color-btn-primary-bg: var(--btn-primary-bg);
+    --color-btn-primary-text: var(--btn-primary-text);
+    --color-btn-primary-hover: var(--btn-primary-hover);
+    --color-btn-primary-ring: var(--btn-primary-ring);
+
+    --color-btn-secondary-bg: var(--btn-secondary-bg);
+    --color-btn-secondary-text: var(--btn-secondary-text);
+    --color-btn-secondary-hover: var(--btn-secondary-hover);
+    --color-btn-secondary-ring: var(--btn-secondary-ring);
+
+    --color-btn-success-bg: var(--btn-success-bg);
+    --color-btn-success-text: var(--btn-success-text);
+    --color-btn-success-hover: var(--btn-success-hover);
+    --color-btn-success-ring: var(--btn-success-ring);
+
+    --color-btn-warning-bg: var(--btn-warning-bg);
+    --color-btn-warning-text: var(--btn-warning-text);
+    --color-btn-warning-hover: var(--btn-warning-hover);
+    --color-btn-warning-ring: var(--btn-warning-ring);
+
+    --color-btn-danger-bg: var(--btn-danger-bg);
+    --color-btn-danger-text: var(--btn-danger-text);
+    --color-btn-danger-hover: var(--btn-danger-hover);
+    --color-btn-danger-ring: var(--btn-danger-ring);
+
+    --animate-pulse-scale: pulse-scale 1s ease-in-out infinite;
+
+    @keyframes pulse-scale {
+        0%,
+        100% {
+            transform: scale(0.5);
+        }
+
+        50% {
+            transform: scale(1);
+        }
+    }
+
+    --animate-pulse-scale-2: pulse-scale 2s ease-in-out infinite;
+
+    @keyframes pulse-scale-2 {
+        0%,
+        100% {
+            transform: scale(0.5);
+        }
+
+        50% {
+            transform: scale(1);
+        }
+    }
+
+    --animate-pulse-scale-3: pulse-scale 3s ease-in-out infinite;
+
+    @keyframes pulse-scale-3 {
+        0%,
+        100% {
+            transform: scale(0.5);
+        }
+
+        50% {
+            transform: scale(1);
+        }
+    }
+    --animate-bounce-x: bounce-x 1s ease-in-out infinite;
+
+    @keyframes bounce-x {
+        0%,
+        100% {
+            transform: translateX(0);
+        }
+
+        50% {
+            transform: translateX(8px);
+        }
+    }
+
+     --animate-shake: shake 0.5s ease-in-out;
+
+    @keyframes shake {
+        0% {
+            transform: translateX(0);
+        }
+
+        20% {
+            transform: translateX(-6px);
+        }
+
+        40% {
+            transform: translateX(6px);
+        }
+
+        60% {
+            transform: translateX(-6px);
+        }
+
+        80% {
+            transform: translateX(6px);
+        }
+
+        100% {
+            transform: translateX(0);
+        }
+    }
+
 }
+
+/*
+|--------------------------------------------------------------------------
+| LIGHT
+|--------------------------------------------------------------------------
+*/
+
+:root,
+html.light {
+
+    --bg-color: #f8fafc;
+    --surface-color: #ffffff;
+    --heading-color: #0f172a;
+    --muted-color: #64748b;
+    --border-color: #e2e8f0;
+    --warning-color: #f59e0b;
+
+    --input-bg-color: #ffffff;
+
+    --btn-neutral-bg-color: #e2e8f0;
+    --btn-neutral-hover-color: #cbd5e1;
+
+    --item-hover-color: #f1f5f9;
+
+    /* Sidebar */
+    --sidebar-bg-color: #4c1d95;
+    --sidebar-text-color: #ffffff;
+    --sidebar-border-color: #6d28d9;
+    --sidebar-hover-color: #5b21b6;
+
+    --tooltip-bg-color: #1e1b4b;
+    --tooltip-text-color: #ffffff;
+
+    /* Primary (Indigo / Violet) */
+    --btn-primary-bg: #6366f1;
+    --btn-primary-text: #ffffff;
+    --btn-primary-hover: #4f46e5;
+    --btn-primary-ring: rgba(99, 102, 241, 0.4);
+
+    /* Secondary (Slate Neutral) */
+    --btn-secondary-bg: #e2e8f0;
+    --btn-secondary-text: #1e293b;
+    --btn-secondary-hover: #cbd5e1;
+    --btn-secondary-ring: rgba(148, 163, 184, 0.35);
+
+    /* Success (Emerald) */
+    --btn-success-bg: #10b981;
+    --btn-success-text: #ffffff;
+    --btn-success-hover: #059669;
+    --btn-success-ring: rgba(16, 185, 129, 0.4);
+
+    /* Warning (Amber / Orange) */
+    --btn-warning-bg: #f59e0b;
+    --btn-warning-text: #ffffff;
+    --btn-warning-hover: #d97706;
+    --btn-warning-ring: rgba(245, 158, 11, 0.4);
+
+    /* Danger (Rose) */
+    --btn-danger-bg: #f43f5e;
+    --btn-danger-text: #ffffff;
+    --btn-danger-hover: #e11d48;
+    --btn-danger-ring: rgba(244, 63, 94, 0.4);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| DARK
+|--------------------------------------------------------------------------
+*/
+
+html.dark {
+
+    --bg-color: #0f172a;
+    --surface-color: #1e293b;
+    --heading-color: #f8fafc;
+    --muted-color: #94a3b8;
+    --border-color: #334155;
+    --warning-color: #f59e0b;
+
+    --input-bg-color: #334155;
+
+    --btn-neutral-bg-color: #334155;
+    --btn-neutral-hover-color: #475569;
+
+    --item-hover-color: #334155;
+
+    /* Sidebar */
+    --sidebar-bg-color: #0f172a;
+    --sidebar-text-color: #f8fafc;
+    --sidebar-border-color: #1e293b;
+    --sidebar-hover-color: #1e293b;
+
+    --tooltip-bg-color: #334155;
+    --tooltip-text-color: #ffffff;
+
+    --btn-primary-bg: #4f46e5;
+    --btn-primary-text: #ffffff;
+    --btn-primary-hover: #4338ca;
+    --btn-primary-ring: rgba(99, 102, 241, 0.5);
+
+    --btn-secondary-bg: #334155;
+    --btn-secondary-text: #f8fafc;
+    --btn-secondary-hover: #475569;
+    --btn-secondary-ring: rgba(148, 163, 184, 0.4);
+
+    --btn-success-bg: #059669;
+    --btn-success-text: #ffffff;
+    --btn-success-hover: #047857;
+    --btn-success-ring: rgba(16, 185, 129, 0.5);
+
+    --btn-warning-bg: #d97706;
+    --btn-warning-text: #ffffff;
+    --btn-warning-hover: #b45309;
+    --btn-warning-ring: rgba(245, 158, 11, 0.5);
+
+    --btn-danger-bg: #e11d48;
+    --btn-danger-text: #ffffff;
+    --btn-danger-hover: #be123c;
+    --btn-danger-ring: rgba(244, 63, 94, 0.5);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| DIM
+|--------------------------------------------------------------------------
+*/
+
+html.dim {
+
+    --bg-color: #15202b;
+    --surface-color: #192734;
+    --heading-color: #ffffff;
+    --muted-color: #8899a6;
+    --border-color: #38444d;
+    --warning-color: #f59e0b;
+
+    --input-bg-color: #22303c;
+
+    --btn-neutral-bg-color: #22303c;
+    --btn-neutral-hover-color: #2b3945;
+
+    --item-hover-color: #22303c;
+
+    /* Sidebar */
+    --sidebar-bg-color: #15202b;
+    --sidebar-text-color: #ffffff;
+    --sidebar-border-color: #2b3945;
+    --sidebar-hover-color: #192734;
+
+    --tooltip-bg-color: #192734;
+    --tooltip-text-color: #60a5fa;
+
+    --btn-primary-bg: #3b82f6;
+    --btn-primary-text: #ffffff;
+    --btn-primary-hover: #2563eb;
+    --btn-primary-ring: rgba(59, 130, 246, 0.45);
+
+    --btn-secondary-bg: #22303c;
+    --btn-secondary-text: #e2e8f0;
+    --btn-secondary-hover: #2b3945;
+    --btn-secondary-ring: rgba(100, 116, 139, 0.4);
+
+    --btn-success-bg: #10b981;
+    --btn-success-text: #ffffff;
+    --btn-success-hover: #059669;
+    --btn-success-ring: rgba(16, 185, 129, 0.4);
+
+    --btn-warning-bg: #f59e0b;
+    --btn-warning-text: #0f172a;
+    --btn-warning-hover: #d97706;
+    --btn-warning-ring: rgba(245, 158, 11, 0.4);
+
+    --btn-danger-bg: #f43f5e;
+    --btn-danger-text: #ffffff;
+    --btn-danger-hover: #e11d48;
+    --btn-danger-ring: rgba(244, 63, 94, 0.4);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| CYBERPUNK
+|--------------------------------------------------------------------------
+*/
+
+html.cyberpunk {
+
+    --bg-color: #000000;
+    --surface-color: #1a1a1a;
+    --heading-color: #00ff66;
+    --muted-color: #ff007f;
+    --border-color: #00ffff;
+    --warning-color: #f59e0b;
+
+    --input-bg-color: #000000;
+
+    --btn-neutral-bg-color: #00ff66;
+    --btn-neutral-hover-color: #ffff00;
+
+    --item-hover-color: #2a2a2a;
+
+    /* Sidebar */
+    --sidebar-bg-color: #121212;
+    --sidebar-text-color: #00ff66;
+    --sidebar-border-color: #ff007f;
+    --sidebar-hover-color: #2a2a2a;
+
+    --tooltip-bg-color: #ff007f;
+    --tooltip-text-color: #000000;
+
+    /* Neon Cyan / Blue */
+    --btn-primary-bg: #00ffff;
+    --btn-primary-text: #000000;
+    --btn-primary-hover: #33ffff;
+    --btn-primary-ring: rgba(0, 255, 255, 0.7);
+
+    /* Neon Slate */
+    --btn-secondary-bg: #1e1e1e;
+    --btn-secondary-text: #00ff66;
+    --btn-secondary-hover: #2a2a2a;
+    --btn-secondary-ring: rgba(0, 255, 102, 0.5);
+
+    /* Neon Green Matrix */
+    --btn-success-bg: #00ff66;
+    --btn-success-text: #000000;
+    --btn-success-hover: #33ff85;
+    --btn-success-ring: rgba(0, 255, 102, 0.7);
+
+    /* Neon Amber / Electric Gold */
+    --btn-warning-bg: #ffff00;
+    --btn-warning-text: #000000;
+    --btn-warning-hover: #ffff4d;
+    --btn-warning-ring: rgba(255, 255, 0, 0.7);
+
+    /* Neon Pink / Magenta */
+    --btn-danger-bg: #ff007f;
+    --btn-danger-text: #ffffff;
+    --btn-danger-hover: #ff3399;
+    --btn-danger-ring: rgba(255, 0, 127, 0.7);
+}
+
+
