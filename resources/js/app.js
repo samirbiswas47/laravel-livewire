@@ -1,3 +1,6 @@
-import SUNEDITOR from "suneditor";
 import "../../vendor/masmerise/livewire-toaster/resources/js";
-window.SUNEDITOR = SUNEDITOR;
+import jQuery from "jquery";
+window.$ = window.jQuery = jQuery;
+
+import "./summernote.min.js";
+

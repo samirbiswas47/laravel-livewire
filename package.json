@@ -19,6 +19,6 @@
         "@laravel/multiplex": "^0.4.1"
     },
     "dependencies": {
-        "suneditor": "^3.3.3"
+        "jquery": "^3.4.1"
     }
 }

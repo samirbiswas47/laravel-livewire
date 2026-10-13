@@ -157,7 +157,7 @@
                     transition
                     duration-200
                     text-left
-                    {{ $isAdminActive ? 'text-indigo-400 font-medium' : 'text-slate-300' }}
+
                 "
             >
                 <i class="fa-solid fa-book min-w-[20px] text-center"></i>

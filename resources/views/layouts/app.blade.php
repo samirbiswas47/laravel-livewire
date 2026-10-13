@@ -37,17 +37,21 @@
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     >
-
+    <!-- CDN option -->
+    <link href="{{asset("summernote/summernote-lite.min.css")}}" rel="stylesheet">
     {{-- =========================================================
         VITE ASSETS
     ========================================================== --}}
     @vite([
         'resources/css/app.css',
         'resources/css/custom.css',
-        'resources/js/app.js'
+        'resources/js/app.js',
+        'resources/js/summernote.min.js',
     ])
 
     @livewireStyles
+
+
 
     {{-- =========================================================
         TOOLTIP CSS

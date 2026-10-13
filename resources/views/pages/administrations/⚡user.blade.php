@@ -26,6 +26,7 @@ new class extends Component
     public string $title = 'Add User';
     public string $id = '';
     public string $role_id = '';
+    public string $editor='';
 
 
     public $roles = [];
@@ -341,7 +342,6 @@ new class extends Component
                                         <livewire:elements.input wire:model="phone" type="text" title="Phone" id="phone" min="0" :required="true" :error="$errors->first('phone')" wire:key="field-phone-{{ $errors->has('phone') }}" colspan="1" />
                                         <livewire:elements.input wire:model="email" type="email" title="Email" id="email" :required="true" :error="$errors->first('email')" wire:key="field-email-{{ $errors->has('email') }}" colspan="1" />
                                         <livewire:elements.input wire:model="role_id" type="select" :isMulti="false" title="Role" id="role_id" :options="$roleOptions" :required="true" :error="$errors->first('role_id')" wire:key="field-role_id-{{ $errors->has('role_id') }}" colspan="1" />
-                                        {{-- Render the entire grid column ONLY in Add mode --}}
                                         @if(empty($id))
                                             <div wire:key="field-password-container" class="col-span-1">
                                                 <livewire:elements.input wire:model="password" type="password" title="Password" id="password" :required="true" :error="$errors->first('password')" wire:key="field-password-input" colspan="1" />
@@ -541,3 +541,4 @@ new class extends Component
         </div>
     </div>
 </div>
+

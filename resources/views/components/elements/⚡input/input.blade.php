@@ -25,11 +25,90 @@
             </div>
         </div>
     @elseif($type === "textarea")
-        <div class="w-100 flex justify-between col-span-{{$colspan}} px-2" wire:ignore>
-            <lable for="{{ $id }}" class="font-medium @if ($colspan=="2") w-15 @else w-30 @endif">{{$title}} @if($required=="true"  || $required === true) <small class="text-red-500">* </small> @endif </lable>
+        @if(str_contains($class, 'editor'))
+            {{-- WYSIWYG Editor via Alpine --}}
+            <div
+                class="w-100 flex justify-between col-span-{{$colspan}} px-2"
+                wire:ignore
+                x-data="{
+                    content: @entangle('value'),
+                    initEditor() {
+                        let $el = $(this.$refs.textarea);
+                        if ($el.next('.note-editor').length) return; // Prevent duplicate init
 
-            <textarea wire:model="value" class="@if ($colspan=="2") w-85 @else w-70 @endif border border-gray-300 focus:border-green-500 focus:outline focus:outline-sky-500 rounded-sm py-2 pl-2  {{$class}}" type="{{$type}}" id="{{$id}}" name="{{$name}}"  rows="{{$rows}}" cols="{{$cols}}"></textarea>
-        </div>
+                        $el.summernote({
+                            height: 250,
+                            placeholder: '{{ $title }}',
+                            toolbar: [
+                                ['style', ['style']],
+                                ['font', ['bold', 'underline', 'clear']],
+                                ['color', ['color']],
+                                ['para', ['ul', 'ol', 'paragraph']],
+                                ['table', ['table']],
+                                ['insert', ['link', 'picture']],
+                                ['view', ['fullscreen', 'codeview']]
+                            ],
+                            callbacks: {
+                                onChange: (contents) => {
+                                    this.content = contents;
+                                }
+                            }
+                        });
+
+                        if (this.content) {
+                            $el.summernote('code', this.content);
+                        }
+                    },
+                    init() {
+                        // Delay execution until the modal transitions into view
+                        this.$nextTick(() => {
+                            setTimeout(() => this.initEditor(), 150);
+                        });
+
+                        // Watch for parent modal toggle if 'show' exists on Alpine scope
+                        if (typeof this.show !== 'undefined') {
+                            this.$watch('show', (isOpen) => {
+                                if (isOpen) {
+                                    setTimeout(() => this.initEditor(), 150);
+                                }
+                            });
+                        }
+
+                        // Sync programmatic Livewire changes back into the editor
+                        this.$watch('content', (newVal) => {
+                            let $el = $(this.$refs.textarea);
+                            if ($el.next('.note-editor').length && newVal !== $el.summernote('code')) {
+                                $el.summernote('code', newVal || '');
+                            }
+                        });
+                    }
+                }"
+            >
+                <label for="{{ $id }}" class="font-medium @if ($colspan=='2') w-15 @else w-30 @endif">
+                    {{$title}} @if($required=="true" || $required === true) <small class="text-red-500">* </small> @endif
+                </label>
+
+                <div class="@if ($colspan=='2') w-85 @else w-70 @endif">
+                    <textarea x-ref="textarea" id="{{$id}}"></textarea>
+                </div>
+            </div>
+        @else
+            {{-- Standard Textarea --}}
+            <div class="w-100 flex justify-between col-span-{{$colspan}} px-2">
+                <label for="{{ $id }}" class="font-medium @if ($colspan=='2') w-15 @else w-30 @endif">
+                    {{$title}} @if($required=="true" || $required === true) <small class="text-red-500">* </small> @endif
+                </label>
+
+                <textarea
+                    wire:model="value"
+                    class="@if($colspan=='2') w-85 @else w-70 @endif border border-gray-300 focus:border-green-500 focus:outline focus:outline-sky-500 rounded-sm py-2 pl-2 {{$class}}"
+                    id="{{$id}}"
+                    name="{{$name}}"
+                    rows="{{$rows ?? 3}}"
+                    cols="{{$cols ?? 30}}"
+                ></textarea>
+            </div>
+        @endif
     @elseif($type === "select")
         <div class="w-100 flex justify-between col-span-{{$colspan}} px-2" wire:ignore>
             <lable for="{{ $id }}" class="font-medium @if ($colspan=="2") w-15 @else w-30 @endif">{{$title}} @if($required=="true"  || $required === true) <small class="text-red-500">* </small> @endif </lable>
