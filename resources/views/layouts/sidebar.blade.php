@@ -1,6 +1,6 @@
 @php
     $currentPage = $page ?? null;
-    $isAdminActive = in_array($currentPage, ['user', 'role', 'permission']) || request()->is('user*', 'role*', 'permission*');
+    $isAdminActive = in_array($currentPage, ['user', 'role', 'menu', 'permission']) || request()->is('user*', 'role*', 'menu*', 'permission*');
 @endphp
 
 <aside
@@ -244,6 +244,34 @@
                     <i class="fa-solid fa-user-shield w-4 text-center text-xs"></i>
                     <span class="sidebar-text whitespace-nowrap">Roles</span>
                 </a>
+
+                {{-- MENUS --}}
+                <a
+                    href="/menu"
+                    wire:navigate
+                    data-tooltip="Menus"
+                    class="
+                        sidebar-item
+                        sidebar-child-item
+                        flex
+                        items-center
+                        gap-3
+                        px-3
+                        py-2
+                        rounded-lg
+                        text-sm
+                        transition
+                        duration-200
+                        {{ request()->is('menu*') || $currentPage === 'menu'
+                            ? 'bg-surface text-success'
+                            : 'text-slate-300 hover:bg-sidebar-hover hover:text-white' }}
+                    "
+                >
+                    <i class="fa-solid fa-user-shield w-4 text-center text-xs"></i>
+                    <span class="sidebar-text whitespace-nowrap">Menus</span>
+                </a>
+
+
 
                 {{-- PERMISSIONS --}}
                 <a

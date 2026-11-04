@@ -6,7 +6,6 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Computed;
 use Livewire\WithPagination;
 use Masmerise\Toaster\Toaster;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -349,26 +348,26 @@ new class extends Component
                         <thead class="bg-background select-none">
                             <tr>
                                 <th class="px-4 py-2.5 text-left font-medium" width="40%">
-                                    <livewire:sort-table-head theadName="Role" sortName="role" :sortField="$sortField" :sortField="$sortDirection"/>
+                                    <livewire:sort-table-head theadName="Role" sortName="role" :sortField="$sortField" :sortDirection="$sortDirection"/>
                                 </th>
 
                                 <th class="px-4 py-2.5 text-center font-medium" width="15%">
-                                    <livewire:sort-table-head theadName="Status" sortName="status" :sortField="$sortField" :sortField="$sortDirection"/>
+                                    <livewire:sort-table-head theadName="Status" sortName="status" :sortField="$sortField" :sortDirection="$sortDirection"/>
                                 </th>
                                 @if($currentFilter!='trash')
                                 <!-- Created At -->
                                 <th class="px-4 py-2.5 text-left font-medium" width="15%">
-                                    <livewire:sort-table-head theadName="Created At" sortName="created_at" :sortField="$sortField" :sortField="$sortDirection"/>
+                                    <livewire:sort-table-head theadName="Created At" sortName="created_at" :sortField="$sortField" :sortDirection="$sortDirection"/>
                                 </th>
                                 @else
                                 <!-- Deleted At -->
                                 <th class="px-4 py-2.5 text-left font-medium" width="15%">
-                                    <livewire:sort-table-head theadName="Deleted At" sortName="deleted_at" :sortField="$sortField" :sortField="$sortDirection"/>
+                                    <livewire:sort-table-head theadName="Deleted At" sortName="deleted_at" :sortField="$sortField" :sortDirection="$sortDirection"/>
                                 </th>
                                 @endif
                                 <!-- Updated At -->
                                 <th class="px-4 py-2.5 text-left font-medium" width="15%">
-                                    <livewire:sort-table-head theadName="Updated At" sortName="updated_at" :sortField="$sortField" :sortField="$sortDirection"/>
+                                    <livewire:sort-table-head theadName="Updated At" sortName="updated_at" :sortField="$sortField" :sortDirection="$sortDirection"/>
                                 </th>
 
                                 <!-- Action (Non-sortable) -->

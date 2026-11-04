@@ -14,7 +14,7 @@ new class extends Component
 ?>
 <form wire:submit="save" class="space-y-4">
     <div>
-        <label class="block font-semibold mb-1">Body</label>
+        <label class="block font-semibold mb-1">Company</label>
         <livewire:elements.input wire:model="editor" type="textarea" title="Editor" id="editor" :required="true" :error="$errors->first('editor')" wire:key="field-editor-{{ $errors->has('editor') }}" colspan="1" class="editor"/>
     </div>
 </form>
